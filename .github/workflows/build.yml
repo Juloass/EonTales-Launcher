@@ -3,7 +3,7 @@ name: Build
 on: push
 
 jobs:
-  release:
+  build:
     runs-on: ${{ matrix.os }}
 
     permissions:
@@ -36,20 +36,18 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run dist
         shell: bash
-        
-      - name: Release
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
-          files: |
-                  if [ "$MATRIX_OS" == "ubuntu-latest" ]; then
-                    dist/*.AppImage
-                  elif [ "$MATRIX_OS" == "windows-latest" ]; then
-                    dist/*.exe
-                  elif [ "$MATRIX_OS" == "macOs-latest" ]; then
-                    dist/*.dmg
-                  fi
-            
+  release:
+    runs-on: ${{ matrix.os }}
+    steps:
+       - name: Release
+         uses: "marvinpinto/action-automatic-releases@latest"
+         with:
+           repo_token: "${{ secrets.GITHUB_TOKEN }}"
+           automatic_release_tag: "latest"
+           prerelease: true
+           title: "Development Build"
+           files: |
+                  *.exe
+                  *.dmg
+                  *.AppImage
+  
