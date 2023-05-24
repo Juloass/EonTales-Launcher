@@ -310,7 +310,7 @@ class ProcessBuilder {
             args.push('--server')
             args.push(this.server.hostname)
             args.push('--port')
-            args.push(this.server.port)
+            args.push(this.server.rawServer.port)
         }
     }
 
