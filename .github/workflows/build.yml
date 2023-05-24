@@ -45,6 +45,11 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            dist/*.exe
-            dist/*.dmg
-            dist/*.AppImage
+                  if [ "$MATRIX_OS" == "ubuntu-latest" ]; then
+                    dist/*.AppImage
+                  elif [ "$MATRIX_OS" == "windows-latest" ]; then
+                    dist/*.exe
+                  elif [ "$MATRIX_OS" == "macOs-latest" ]; then
+                    dist/*.dmg
+                  fi
+            
