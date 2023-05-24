@@ -160,6 +160,9 @@ updateSelectedAccount(ConfigManager.getSelectedAccount())
 
 // Bind selected server
 function updateSelectedServer(serv) {
+    document.getElementById('image_seal').src = serv.rawServer.icon;
+    document.body.style.backgroundImage = `url('${serv.rawServer.background}')`
+
     if (getCurrentView() === VIEWS.settings) {
         fullSettingsSave()
     }
